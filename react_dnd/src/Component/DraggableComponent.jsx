@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import { useDrop } from "react-dnd";
 import DropTargetContainer from "./DropTargetContainer";
+// import Imag1 from "./"
 
 const DraggableComponent = () => {
   const [boardList, setBoardList] = useState([]);
   const picturesList = [
     {
       id: 1,
-      url: "https://media.istockphoto.com/id/1352603244/photo/shot-of-an-unrecognizable-businessman-working-on-his-laptop-in-the-office.webp?b=1&s=170667a&w=0&k=20&c=cae8s_ncw2axGBVrD5vJR6DBqmVbQkKfAP1ecKUvQzQ=",
+
+      url: "../1.jpg",
     },
     {
       id: 2,
-      url: "https://media.istockphoto.com/id/1434947710/photo/businessman-headphones-and-laptop-webinar-in-office-with-coffee-on-table-video-call-or.webp?b=1&s=170667a&w=0&k=20&c=mfRJ9spkAZVKJdpEDFhjh6x06kYdLFhy2TaqXD_wYfI=",
+      url: "../4.jpg",
     },
     {
       id: 3,
-      url: "https://media.istockphoto.com/id/1438185814/photo/college-student-asian-man-and-studying-on-laptop-at-campus-research-and-education-test-exam.webp?b=1&s=170667a&w=0&k=20&c=GB278ll5DUQDJx4WnhrD-DCwjjjfTfyVCB7jmGz5fmQ=",
+      url: "../2.jpg",
+    },
+    {
+      id: 4,
+      url: "../3.jpg",
     },
   ];
 
@@ -41,6 +47,14 @@ const DraggableComponent = () => {
           margin: "10px",
           width: "600px",
           height: "500px",
+          display: "grid",
+          justifyContent: "center",
+          alignContent: "center",
+          margin: "auto",
+
+          gap: "1rem",
+          gridTemplateRows: "repeat(2,1fr)",
+          gridTemplateColumns: "repeat(2,1fr)",
         }}
       >
         {picturesList.map((picture) => (

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDrag } from "react-dnd";
 
-const DropTargetContainer = ({ id, url }) => {
+const  DropTargetContainer = ({ id, url }) => {
   const [{ isDragging }, drag] = useDrag({
     type: "image",
     item: { id: id },
