@@ -1,24 +1,24 @@
 import React from "react";
-import { useDrop } from "react-dnd";
+import { useDrag } from "react-dnd";
 
-const DropTargetContainer = ({ onDrop }) => {
-  const [, ref] = useDrop({
-    accept: "DRAGGABLE_ITEM", // Specify the type of item that can be dropped here
-    drop: (item) => {
-      onDrop(item); // Callback function to handle the dropped item
-    },
+const DropTargetContainer = ({ id, url }) => {
+  const [{ isDragging }, drag] = useDrag({
+    type: "image",
+    item: { id: id },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
   });
 
   return (
-    <div
-      ref={ref}
-      style={{
-        border: "1px dashed #000",
-        padding: "16px",
-      }}
-    >
-      Drop here
-    </div>
+    <>
+      <img
+        ref={drag}
+        src={url}
+        width={"150px"}
+        style={{ border: isDragging ? "5px solid pink" : "0px" }}
+      />
+    </>
   );
 };
 

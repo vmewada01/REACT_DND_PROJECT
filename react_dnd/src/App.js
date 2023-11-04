@@ -16,25 +16,16 @@ function App() {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="App">
-        <h1>React DnD Example</h1>
-        <div style={{ display: "flex" }}>
-          <div style={{ marginRight: "20px" }}>
-            <h2>Draggable Items</h2>
-            <DraggableComponent name="Car" />
-          </div>
-          <div>
-            <h2>Drop Target</h2>
-            <DropTargetContainer onDrop={handleDrop} />
-            <div>
-              <h3>Dropped Items</h3>
-              <ul>
-                {droppedItems.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
+        <h1
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "5px",
+          }}
+        >
+          Drag and Drop
+        </h1>
+        <DraggableComponent />
       </div>
     </DndProvider>
   );
