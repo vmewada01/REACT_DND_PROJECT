@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import DropTargetContainer from "./DropTargetContainer";
 // import Imag1 from "./"
@@ -37,6 +37,18 @@ const DraggableComponent = () => {
     const picList = picturesList.filter((item) => id === item.id);
     setBoardList((board) => [...board, picList[0]]);
   };
+  console.log(boardList, "board List");
+
+  const array = [];
+  boardList?.map((item) => array.push(item.id));
+
+  console.log(array,"store id");
+
+  const answer_array = [2, 4, 3, 1];
+
+  if (array == answer_array) {
+    alert("Puzzle solve successfully");
+  }
 
   return (
     <div style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
@@ -46,13 +58,10 @@ const DraggableComponent = () => {
           background: "green",
           margin: "10px",
           width: "600px",
-          height: "500px",
           display: "grid",
           justifyContent: "center",
           alignContent: "center",
           margin: "auto",
-
-          gap: "1rem",
           gridTemplateRows: "repeat(2,1fr)",
           gridTemplateColumns: "repeat(2,1fr)",
         }}
@@ -66,14 +75,16 @@ const DraggableComponent = () => {
         ref={drop}
         style={{
           backgroundColor: "blue",
-          display: "flex",
-          flexWrap: "wrap",
-          flexDirection: "column",
+          display: "grid",
           margin: "10px",
-          gap: "5px",
           width: "600px",
-          height: "500px",
+          height: "600px",
           border: "2px solid black",
+          justifyContent: "center",
+          alignContent: "center",
+          margin: "auto",
+          gridTemplateRows: "repeat(2,1fr)",
+          gridTemplateColumns: "repeat(2,1fr)",
         }}
       >
         {boardList?.map((picture) => (
