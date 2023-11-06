@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import DropTargetContainer from "./DropTargetContainer";
-// import Imag1 from "./"
+import { Button, Typography, message } from "antd";
 
+const { Title } = Typography;
 const DraggableComponent = () => {
   const [boardList, setBoardList] = useState([]);
   const picturesList = [
@@ -35,61 +36,94 @@ const DraggableComponent = () => {
 
   const addImageToBoard = (id) => {
     const picList = picturesList.filter((item) => id === item.id);
-    setBoardList((board) => [...board, picList[0]]);
+    if (boardList.length < 4) {
+      setBoardList((board) => [...board, picList[0]]);
+    }
   };
-  console.log(boardList, "board List");
 
-  const array = [];
-  boardList?.map((item) => array.push(item.id));
+  const handleSubmit = () => {
+    if (boardList.length < 4) {
+      return message.error("Please drop all the images");
+    }
 
-  console.log(array,"store id");
+    const array = [];
+    boardList?.map((item) => array.push(Number(item.id)));
+    const answer_array = [2, 4, 3, 1];
 
-  const answer_array = [2, 4, 3, 1];
+    let areEqual = true;
 
-  if (array == answer_array) {
-    alert("Puzzle solve successfully");
-  }
+    if (array.length === answer_array.length) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] !== answer_array[i]) {
+          areEqual = false;
+          break;
+        }
+      }
+    } else {
+      areEqual = false;
+    }
 
+    if (areEqual) {
+      message.success("You have successfully solve the image captcha");
+    } else {
+      message.info("Sorry you have failed to arranged the captcha");
+    }
+  };
   return (
-    <div style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
-      <div
-        className="Picture"
-        style={{
-          background: "green",
-          margin: "10px",
-          width: "600px",
-          display: "grid",
-          justifyContent: "center",
-          alignContent: "center",
-          margin: "auto",
-          gridTemplateRows: "repeat(2,1fr)",
-          gridTemplateColumns: "repeat(2,1fr)",
-        }}
+    <div>
+      <Title
+        italic={true}
+        style={{ display: "flex", justifyContent: "center" }}
       >
-        {picturesList.map((picture) => (
-          <DropTargetContainer url={picture.url} id={picture.id} />
-        ))}
-      </div>
-      <div
-        className="Board"
-        ref={drop}
-        style={{
-          backgroundColor: "blue",
-          display: "grid",
-          margin: "10px",
-          width: "600px",
-          height: "600px",
-          border: "2px solid black",
-          justifyContent: "center",
-          alignContent: "center",
-          margin: "auto",
-          gridTemplateRows: "repeat(2,1fr)",
-          gridTemplateColumns: "repeat(2,1fr)",
-        }}
-      >
-        {boardList?.map((picture) => (
-          <DropTargetContainer url={picture.url} id={picture.id} />
-        ))}
+        <Button
+          style={{ textAlign: "center" }}
+          type="primary"
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
+      </Title>
+
+      <div style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
+        <div
+          className="Picture"
+          style={{
+            margin: "10px",
+            width: "600px",
+            display: "grid",
+            gap: "5px",
+            justifyContent: "center",
+            alignContent: "center",
+            margin: "auto",
+            gridTemplateRows: "repeat(2,1fr)",
+            gridTemplateColumns: "repeat(2,1fr)",
+          }}
+        >
+          {picturesList.map((picture) => (
+            <DropTargetContainer url={picture.url} id={picture.id} />
+          ))}
+        </div>
+        <div
+          className="Board"
+          ref={drop}
+          style={{
+            backgroundColor: "gray",
+            display: "grid",
+            margin: "10px",
+            width: "600px",
+            height: "600px",
+            border: "2px solid black",
+            justifyContent: "center",
+            alignContent: "center",
+            margin: "auto",
+            gridTemplateRows: "repeat(2,1fr)",
+            gridTemplateColumns: "repeat(2,1fr)",
+          }}
+        >
+          {boardList?.map((picture) => (
+            <DropTargetContainer url={picture.url} id={picture.id} />
+          ))}
+        </div>
       </div>
     </div>
   );

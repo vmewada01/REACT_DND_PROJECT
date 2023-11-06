@@ -6,6 +6,9 @@ import DraggableComponent from "./Component/DraggableComponent";
 import DropTargetContainer from "./Component/DropTargetContainer";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { Button, Typography } from "antd";
+
+const { Title } = Typography;
 
 function App() {
   const [droppedItems, setDroppedItems] = useState([]);
@@ -15,18 +18,11 @@ function App() {
   };
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="App">
-        <h1
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "5px",
-          }}
-        >
-          Drag and Drop
-        </h1>
-        <DraggableComponent />
-      </div>
+      <Title code={true} style={{ display: "flex", justifyContent: "center" }}>
+        Solve the Image Captcha
+      </Title>
+
+      <DraggableComponent />
     </DndProvider>
   );
 }
